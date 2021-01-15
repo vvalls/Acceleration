@@ -8,6 +8,7 @@ data, labels = load_dataset("MNIST",[0,1],1000,100);
 f,∇f,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels);
 
 k = 1000
+m,n = size(data)
 x_ini = zeros(n)
 
 function gradient_fun(x)
