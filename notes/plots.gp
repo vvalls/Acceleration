@@ -151,6 +151,7 @@ set ylabel "f(y_k) - f^*"
 
 set terminal pdfcairo size 7cm, 5cm
 set key bottom right
+set key off
 
 set output "figures/quadratic_exact_gradient.pdf"
 set title "Exact gradients"
@@ -162,7 +163,7 @@ plot    "logs/MNIST_exact_gradient.txt" every 1 using 1:2 with lines title 'Mirr
         "logs/MNIST_exact_gradient.txt" every 1 using 1:7 with lines title 'ACGD (ICML 20)' ls 6 lw 2, \
         "logs/MNIST_exact_gradient.txt" every 1 using 1:8 with lines title 'muACGD (ICML 20)' ls 7 lw 2, \
 
-
+set key on
 set output "figures/quadratic_noisy_gradient.pdf"
 set title "Noisy gradients"
 plot    "logs/MNIST_noisy_gradient.txt" every 1 using 1:2 with lines title 'Mirror descent' ls 1 lw 2, \
