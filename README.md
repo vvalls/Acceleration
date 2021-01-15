@@ -14,7 +14,7 @@ function gradient_fun(x)
     return ∇f(x), 0
 end
 
-@time f_opt = ufom(f,gradient_fun,∇ϕ_cjg,x_ini,σ,L,μ,k,Inf,false)[end]
+@time opt_val = ufom(f,gradient_fun,∇ϕ_cjg,x_ini,σ,L,μ,k,Inf,false)[end]
 ```
 
 
