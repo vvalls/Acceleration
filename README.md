@@ -2,7 +2,7 @@
 
 This repository contains the Julia implementation of multiple accelerated algorithms used for distributed learning. The following is quick example on how to use the package:
 
-```
+```julia
 using Acceleration
 data, labels = load_dataset("MNIST",[0,1],1000,100);
 f,∇f,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels);
