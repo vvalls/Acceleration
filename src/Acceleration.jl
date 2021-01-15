@@ -8,14 +8,46 @@ module Acceleration
     end
 
     include("first_order_algorithms.jl")
-    include("linear_regression.jl")
     include("datasets.jl")
-    
-    export mirror_descent
-    export gradient_descent
-    export accelerated_mirror_descent
-    export SCVX_AMD
-    export linear_regression
+    include("libsvm_datasets.jl")
+
+    include("linear_regression.jl")
+    include("logistic_regression.jl")
+    include("svm.jl")
+    include("perceptron.jl")
+
+    ### Algorithms functions
+    export MD
+    export GD
+    export PGD_avg
+    export AMD_plus
+    export μAMD_plus
+    export ufom
+    export ACGD
+    export μACGD
+    export AGD
+
+    ### Dataset functions
     export load_dataset
+    export load_libsvm_dataset
+
+    ### ML models
+    # Linear regression
+    export linear_regression
+    export linear_regression_compute_optval
+
+    # SVM
+    export svm_setup
+    export svm_compute_optval
+    export svm_plot
+
+    # Perceptron
+    export perceptron_setup
+    export perceptron_compute_optval
+    export perceptron_plot
+
+    # Logistic linear_regression
+    export logistic_regression
+    export logistic_regression_compute_optval
 
 end # module

@@ -1,4 +1,6 @@
 using LinearAlgebra
+using JuMP
+using Ipopt
 
 function linear_regression(data,labels)
 
@@ -26,5 +28,19 @@ function linear_regression(data,labels)
     σ = 1;
 
     return f,∇f,∇ϕ_cjg,σ,L,μ
+
+end
+
+
+
+function linear_regression_compute_optval(f,n)
+
+    model = Model(with_optimizer(Ipopt.Optimizer))
+    set_silent(model)
+    @variable(model, x[1:n])
+    @objective(model, Min, f(x))
+    optimize!(model)
+
+    return value.(x);
 
 end

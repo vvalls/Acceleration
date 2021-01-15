@@ -1,11 +1,10 @@
 using MLDatasets
+using DataFrames
+using RDatasets
+using DelimitedFiles
 
 function load_dataset(dataset, labels_subset, num_samples, num_features)
 
-    loaded_data, loaded_labels = FashionMNIST.traindata()
-    loaded_data = reshape(loaded_data, :, size(loaded_data)[end])
-
-    #==>
     loaded_data = []; loaded_labels = [];
 
     if(dataset == "MNIST")
@@ -18,17 +17,30 @@ function load_dataset(dataset, labels_subset, num_samples, num_features)
         loaded_data, loaded_labels = CIFAR100.traindata()
     elseif(dataset == "SVHN-2")
         loaded_data, loaded_labels = SVHN2.traindata()
+    elseif(dataset == "Iris") # Number of samples not applied here. Add as optional in the function argument
+        iris = RDatasets.dataset("datasets", "iris")
+        labels = [species == "versicolor" ? 1.0 : -1.0 for species in iris.Species]
+        data = hcat(ones(size(iris, 1)), iris.SepalLength, iris.SepalWidth, iris.PetalLength, iris.PetalWidth);
+        return data, labels
+    elseif(dataset == "a5a") # Number of samples not applied here. Add as optional in the function argument
+        data = readdlm("../datasets/a5a_data.txt", Float64);
+        labels = readdlm("../datasets/a5a_labels.txt", Float64);
+        #iris = RDatasets.dataset("datasets", "iris")
+        #labels = [species == "versicolor" ? 1.0 : -1.0 for species in iris.Species]
+        #data = hcat(ones(size(iris, 1)), iris.SepalLength, iris.SepalWidth, iris.PetalLength, iris.PetalWidth);
+        return data, labels
     else
         loaded_data, loaded_labels = MNIST.traindata()
+        @warn("Dataset doesn't exists. Loading MNIST instead.")
     end
-    <==#
-
-    #loaded_data = readdlm("data/mnist_data.txt")[:,1:num_samples];
-    #loaded_labels = Int16.(readdlm("data/mnist_labels.txt"));
 
     filtered_data = []; filtered_labels = [];
+    total_samples = size(loaded_data)[end]
+    loaded_data = reshape(loaded_data,:,total_samples)
 
-    for i=1:num_samples
+    @info(string("Loading dataset ",dataset," with ", size(loaded_data,2), " samples and ", size(loaded_data,1) ," features"))
+
+    for i=1:min(num_samples,total_samples)
         if(loaded_labels[i] in labels_subset)
             filtered_data = vcat(filtered_data, loaded_data[:,i])
             filtered_labels = vcat(filtered_labels,loaded_labels[i])
@@ -38,6 +50,7 @@ function load_dataset(dataset, labels_subset, num_samples, num_features)
     n = length(filtered_labels);
     samples = reshape(filtered_data,:,n)
     labels = Float64.(filtered_labels)
+    labels = sign.(labels .- sum(labels_subset)/2);
 
     ### PCA for dimensionality reduction
     X = samples .- (1/n)*sum(samples, dims=2);
