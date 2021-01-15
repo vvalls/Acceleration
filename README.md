@@ -1,4 +1,4 @@
-# Acceleration
+# Acceleration.jl
 
 This repository contains the Julia implementation of multiple accelerated algorithms used for distributed learning. The following is quick example on how to use the package:
 
