@@ -1,6 +1,6 @@
 # Acceleration.jl
 
-This repository contains the Julia package with multiple accelerated algorithms for distributed learning. The following is quick example on how to use the package:
+This repository contains a Julia package with multiple accelerated algorithms for distributed learning. The following is quick example of how to use the package:
 
 ```julia
 using Acceleration
@@ -23,6 +23,4 @@ end
 @time f_y = ufom(f,gradient_fun,∇ϕ_cjg,x_ini,σ,L,μ,k,Inf,false)[end]
 ```
 
-
-
-See the Jupyter notebook "ICML Experiments" for several examples of using the different algorithms with different ML models and datasets.
+See the Jupyter notebook "ICML Experiments" for several examples on how to use the multiple algorithms with different ML models and datasets.
