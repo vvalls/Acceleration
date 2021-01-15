@@ -23,4 +23,4 @@ end
 @time f_y = ufom(f,gradient_fun,∇ϕ_cjg,x_ini,σ,L,μ,k,Inf,false)[end]
 ```
 
-See the Jupyter notebook "ICML Experiments" for several examples on how to use the accelerated algorithms with different ML models and datasets.
+See the Jupyter notebook "ICML Experiments" for several examples on how to use the algorithms with different ML models and datasets.
