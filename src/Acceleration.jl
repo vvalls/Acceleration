@@ -15,6 +15,7 @@ module Acceleration
     include("logistic_regression.jl")
     include("svm.jl")
     include("perceptron.jl")
+    include("rand_psd.jl")
 
     ### Algorithms functions
     export MD
@@ -25,7 +26,7 @@ module Acceleration
     export ufom
     export ACGD
     export μACGD
-    export AGD
+    export Nesterov83
 
     ### Dataset functions
     export load_dataset
@@ -50,4 +51,7 @@ module Acceleration
     export logistic_regression
     export logistic_regression_compute_optval
 
+    # Random PSD
+    export rand_psd
+    export rand_psd_compute_optval
 end # module

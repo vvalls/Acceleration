@@ -1,175 +1,84 @@
 reset
 
-load 'dark2.pal'
+load 'lum.pal'
 load 'grid.cfg'
 
-set xtics 250
-set xrange [1:1000]
+#set xtics 2500
+set xrange [1:100000]
 set logscale y
-set format y "10^{%L}"
-set xlabel "training rounds (k)"
-set ylabel "f(y_k) - f^*"
+set logscale x
 
-set terminal pdfcairo size 6cm, 5cm
+set format y "$10^{%L}$"
+set format x "$10^{%L}$"
+set xlabel "$k$"
+set ylabel '$f(y_k) - \hat f^{\star}$'
+set yrange [1e-12:1e4]
+
+#set terminal pdfcairo size 6cm, 5cm enhanced font 'Verdana,10'
+set terminal epslatex size 7.5cm, 6cm
+set title "negative offset" offset 0,-1
+set key out horiz
+set key top center
 
 ####### ROUNDS
 ### MUSHROOM DATASET
-set title "Random sparsification"
-set output "figures/mushrooms_random_sparsification.pdf"
-plot    "logs/mushrooms_random_sparsification.txt" every 1 using 1:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/mushrooms_random_sparsification.txt" every 1 using 1:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/mushrooms_random_sparsification.txt" every 1 using 1:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
+set title 'Na\"ive random sparsification'
+set output "figures/mushrooms_random_sparsification.tex"
+plot    "logs/mushrooms_random_sparsification.txt" every 1 using 1:4 with lines title 'ADCG (determnistic)' ls 5 lw 7, \
+        "logs/mushrooms_random_sparsification.txt" every 1 using 1:6 with lines notitle 'Alg. 3 (CG)' ls 6 lw 7, \
+        "logs/mushrooms_random_sparsification.txt" every 1 using 1:7 with lines notitle 'Alg. 3 (CG)' ls 3 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using 1:4 with lines title 'ADCG (mini-bathc + comp.)' ls 9 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using 1:6 with lines notitle 'Alg 1. (EG)' ls 1 lw 7, \
 
 set title "Random dithering"
-set output "figures/mushrooms_dithering.pdf"
-plot    "logs/mushrooms_dithering.txt" every 1 using 1:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/mushrooms_dithering.txt" every 1 using 1:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/mushrooms_dithering.txt" every 1 using 1:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
+set output "figures/mushrooms_dithering.tex"
+plot    "logs/mushrooms_dithering.txt" every 1 using 1:4 with lines notitle 'ADCG' ls 5 lw 7, \
+        "logs/mushrooms_dithering.txt" every 1 using 1:6 with lines title 'Algorithm 3 (CG; $\lambda_0$)' ls 6 lw 7, \
+        "logs/mushrooms_dithering.txt" every 1 using 1:7 with lines title 'Algorithm 3 (CG; $p=5$)' ls 3 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using 1:4 with lines notitle 'ADCG (EG)' ls 9 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using 1:6 with lines notitle 'Algorithm 1 (EG)' ls 1 lw 7, \
 
 set title "Natural compression"
-set output "figures/mushrooms_natural_compression.pdf"
-plot    "logs/mushrooms_natural_compression.txt" every 1 using 1:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/mushrooms_natural_compression.txt" every 1 using 1:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/mushrooms_natural_compression.txt" every 1 using 1:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 1:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
+set output "figures/mushrooms_natural_compression.tex"
+plot    "logs/mushrooms_natural_compression.txt" every 1 using 1:4 with lines notitle 'ADCG (CG)' ls 5 lw 7, \
+        "logs/mushrooms_natural_compression.txt" every 1 using 1:6 with lines notitle 'Alg. 3 (CG; $\lambda_0$)' ls 6 lw 7, \
+        "logs/mushrooms_natural_compression.txt" every 1 using 1:7 with lines notitle 'Alg. 3 (CG; $p=5$)' ls 3 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using 1:4 with lines notitle 'ADCG (EG)' ls 9 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using 1:6 with lines title 'Algorithm 1 (EG)' ls 1 lw 7, \
 
-### A5A DATASET
-set title "Random sparsification"
-set output "figures/a5a_random_sparsification.pdf"
-plot    "logs/a5a_random_sparsification.txt" every 1 using 1:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/a5a_random_sparsification.txt" every 1 using 1:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/a5a_random_sparsification.txt" every 1 using 1:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
+set xlabel "Total size of communicated gradients (Mbits)"
+set autoscale x
+set xrange [0.1:300]
+#set format x "$%2.0t{/Symbol \327}10^{%L}$"
+#set format x "$10^{%L}$"
 
-set title "Random dithering"
-set output "figures/a5a_dithering.pdf"
-plot    "logs/a5a_dithering.txt" every 1 using 1:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/a5a_dithering.txt" every 1 using 1:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/a5a_dithering.txt" every 1 using 1:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
-
-set title "Natural compression"
-set output "figures/a5a_natural_compression.pdf"
-plot    "logs/a5a_natural_compression.txt" every 1 using 1:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/a5a_natural_compression.txt" every 1 using 1:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/a5a_natural_compression.txt" every 1 using 1:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 1:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
-
-
-set xlabel "Bits"
-set xtics 250000
-set xrange [1:1000000]
-set format x "%2.0t{/Symbol \327}10^{%L}"
+set terminal epslatex size 7.5cm, 5.5cm
 
 ####### BITS
 ### MUSHROOM DATASET
-set output "figures/mushrooms_random_sparsification_bits.pdf"
-set title "Random sparsification"
-plot    "logs/mushrooms_random_sparsification.txt" every 1 using 3:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/mushrooms_random_sparsification.txt" every 1 using 3:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/mushrooms_random_sparsification.txt" every 1 using 3:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
+set output "figures/mushrooms_random_sparsification_bits.tex"
+set title 'Na\"ive random sparsification'
+plot    "logs/mushrooms_random_sparsification.txt" every 1 using ($3/1000000):4 with lines notitle 'ADCG (CG)' ls 5 lw 7, \
+        "logs/mushrooms_random_sparsification.txt" every 1 using ($3/1000000):6 with lines notitle 'Alg. 3 (CG)' ls 6 lw 7, \
+        "logs/mushrooms_random_sparsification.txt" every 1 using ($3/1000000):7 with lines notitle 'Alg. 3 (CG; $p=5$)' ls 3 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using ($2/1000000):4 with lines notitle 'ADCG (EG)' ls 9 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using ($2/1000000):6 with lines notitle 'Alg. 1 (EG)' ls 1 lw 7, \
 
 set title "Random dithering"
-set output "figures/mushrooms_dithering_bits.pdf"
-plot    "logs/mushrooms_dithering.txt" every 1 using 3:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/mushrooms_dithering.txt" every 1 using 3:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/mushrooms_dithering.txt" every 1 using 3:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
+set output "figures/mushrooms_dithering_bits.tex"
+plot    "logs/mushrooms_dithering.txt" every 1 using ($3/1000000):4 with lines notitle 'ADCG (CG)' ls 5 lw 7, \
+        "logs/mushrooms_dithering.txt" every 1 using ($3/1000000):6 with lines notitle 'Algorithm 3 (CG)' ls 6 lw 7, \
+        "logs/mushrooms_dithering.txt" every 1 using ($3/1000000):7 with lines notitle 'Algorithm 3 (CG; $p=5$)' ls 3 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using ($2/1000000):4 with lines notitle 'ADCG (EG)' ls 9 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using ($2/1000000):6 with lines notitle 'Alg. 1 (EG)' ls 1 lw 7, \
 
 set title "Natural compression"
-set output "figures/mushrooms_natural_compression_bits.pdf"
-plot    "logs/mushrooms_natural_compression.txt" every 1 using 3:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/mushrooms_natural_compression.txt" every 1 using 3:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/mushrooms_natural_compression.txt" every 1 using 3:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/mushrooms_exact_gradient.txt" every 1 using 2:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
-
-### A5A DATASET
-set title "Random sparsification"
-set output "figures/a5a_random_sparsification_bits.pdf"
-plot    "logs/a5a_random_sparsification.txt" every 1 using 3:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/a5a_random_sparsification.txt" every 1 using 3:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/a5a_random_sparsification.txt" every 1 using 3:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
-
-set title "Random dithering"
-set output "figures/a5a_dithering_bits.pdf"
-plot    "logs/a5a_dithering.txt" every 1 using 3:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/a5a_dithering.txt" every 1 using 3:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/a5a_dithering.txt" every 1 using 3:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
-
-set title "Natural compression"
-set output "figures/a5a_natural_compression_bits.pdf"
-plot    "logs/a5a_natural_compression.txt" every 1 using 3:4 with lines title 'ADCG' ls 1 lw 2, \
-        "logs/a5a_natural_compression.txt" every 1 using 3:5 with lines title 'AMD+' ls 2 lw 2, \
-        "logs/a5a_natural_compression.txt" every 1 using 3:6 with lines title 'This paper' ls 3 lw 2, \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:4 with lines notitle ls 1 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:5 with lines notitle ls 2 lw 2 dashtype '.-_', \
-        "logs/a5a_exact_gradient.txt" every 1 using 2:6 with lines notitle ls 3 lw 2 dashtype '.-_', \
+set output "figures/mushrooms_natural_compression_bits.tex"
+plot    "logs/mushrooms_natural_compression.txt" every 1 using ($3/1000000):4 with lines notitle 'ADCG (CG)' ls 5 lw 7, \
+        "logs/mushrooms_natural_compression.txt" every 1 using ($3/1000000):6 with lines notitle 'Alg. 3 (CG)' ls 6 lw 7, \
+        "logs/mushrooms_natural_compression.txt" every 1 using ($3/1000000):7 with lines notitle 'Alg. 3 (CG; $p=5$)' ls 3 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using ($2/1000000):4 with lines notitle 'ADCG (EG)' ls 9 lw 7, \
+        "logs/mushrooms_exact_gradient.txt" every 1 using ($2/1000000):6 with lines notitle 'Alg. 1 (EG)' ls 1 lw 7, \
 
 
-
-################## QUADRATIC ##################
-
-reset
-
-load 'dark2.pal'
-load 'grid.cfg'
-
-set xtics 250
-set xrange [1:1000]
-set yrange [1e-8:1e2]
-set logscale y
-set format y "10^{%L}"
-set xlabel "training rounds (k)"
-set ylabel "f(y_k) - f^*"
-
-set terminal pdfcairo size 7cm, 5cm
-set key bottom right
-set key off
-
-set output "figures/quadratic_exact_gradient.pdf"
-set title "Exact gradients"
-plot    "logs/MNIST_exact_gradient.txt" every 1 using 1:2 with lines title 'Mirror descent' ls 1 lw 2, \
-        "logs/MNIST_exact_gradient.txt" every 1 using 1:3 with lines title 'Gradient descent' ls 2 lw 2, \
-        "logs/MNIST_exact_gradient.txt" every 1 using 1:4 with lines title 'New algorithm' ls 3 lw 2, \
-        "logs/MNIST_exact_gradient.txt" every 1 using 1:5 with lines title 'AMD+ (ICML 18)' ls 4 lw 2, \
-        "logs/MNIST_exact_gradient.txt" every 1 using 1:6 with lines title 'muAMD+ (ICML 18)' ls 5 lw 2, \
-        "logs/MNIST_exact_gradient.txt" every 1 using 1:7 with lines title 'ACGD (ICML 20)' ls 6 lw 2, \
-        "logs/MNIST_exact_gradient.txt" every 1 using 1:8 with lines title 'muACGD (ICML 20)' ls 7 lw 2, \
-
-set key on
-set output "figures/quadratic_noisy_gradient.pdf"
-set title "Noisy gradients"
-plot    "logs/MNIST_noisy_gradient.txt" every 1 using 1:2 with lines title 'Mirror descent' ls 1 lw 2, \
-        "logs/MNIST_noisy_gradient.txt" every 1 using 1:3 with lines title 'Gradient descent' ls 2 lw 2, \
-        "logs/MNIST_noisy_gradient.txt" every 1 using 1:4 with lines title 'New algorithm' ls 3 lw 2, \
-        "logs/MNIST_noisy_gradient.txt" every 1 using 1:5 with lines title 'AMD+ (ICML 18)' ls 4 lw 2, \
-        "logs/MNIST_noisy_gradient.txt" every 1 using 1:6 with lines title 'muAMD+ (ICML 18)' ls 5 lw 2, \
-        "logs/MNIST_noisy_gradient.txt" every 1 using 1:7 with lines title 'ACGD (ICML 20)' ls 6 lw 2, \
-        "logs/MNIST_noisy_gradient.txt" every 1 using 1:8 with lines title 'muACGD (ICML 20)' ls 7 lw 2, \
+##########

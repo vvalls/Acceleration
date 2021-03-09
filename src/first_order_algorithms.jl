@@ -57,7 +57,7 @@ function GD(f,∇f,x_ini,σ,L,k)
         gradient, ξ = ∇f(x)
         x = x - α*gradient;
 
-        f_val[i] = f(sumx/A)
+        f_val[i] = f(x)
     end
 
     return f_val;
@@ -81,7 +81,7 @@ function AMD_plus(f,∇f,∇ϕ_cjg,x_ini,σ,L,k)
         x = (A-α)*inv(A)*y + α*inv(A)*∇ϕ_cjg(z);
         gradient, ξ = ∇f(x)
         z = z - α*gradient;
-        y = (A-α)*inv(A)*y + α*inv(A)*∇ϕ_cjg(z); # Nesterov's update: y = x - inv(L)*∇f(x);
+        y = (A-α)*inv(A)*y + α*inv(A)*∇ϕ_cjg(z);
 
         f_val[i] = f(y)
     end
@@ -128,7 +128,7 @@ function μAMD_plus(f,∇f,∇ϕ_cjg,x_ini,L,μ,k)
 end
 
 ### Unified accelerated algorithm
-function ufom(f,∇f,∇ϕ_cjg,x_ini,σ,L,μ,k,p,adaptive)
+function ufom(f,∇f,∇ϕ_cjg,x_ini,σ,L,μ,k,p)
     n = length(x_ini)
     x = x_ini;
     y = zeros(n);
@@ -152,12 +152,7 @@ function ufom(f,∇f,∇ϕ_cjg,x_ini,σ,L,μ,k,p,adaptive)
         v_past = v;
         v = (z + μ*AX)*inv(1 + μ*(A-A0));
         y = (A-α)*inv(A)*y + α*inv(A)*v; # Nesterov's update for l_2 and C = R^n: y = x - inv(L)*∇f(x);
-        if(adaptive)
-            p = max(1,k * sqrt(μ/L)*sqrt(max(0,1 - α^2/(μ*(A-α) + σ)^2 * ξ^2 / norm(v-v_past,2)^2)))
-        end
-        #if(ξ > sqrt(1-λ)*(μ*A + σ)/α * (v-v_past)'*(v-v_past))
-        #    y = x;
-        #end
+
         f_val[i] = f(y)
     end
 
@@ -218,7 +213,7 @@ end
 
 
 # Original Nesterov's AGD
-function AGD(f,∇f,x_ini,k)
+function Nesterov83(f,∇f,x_ini,k)
 
     n = length(x_ini);
     f_val = zeros(k);
