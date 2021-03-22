@@ -25,3 +25,6 @@ plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ## Functions
 
 ### Loading datasets
+```
+data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
+```
