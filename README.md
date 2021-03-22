@@ -25,22 +25,23 @@ plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 
 ## Package Functions
 
-### Problem Models
+### Datasets
 
-***Image datasets***
+#### Image datasets
 ```julia
 data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
 ```
 where 
 ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to select the ```labels``` to use in the data set, and the number of samples ```m``` and features ```n```.
 
-***LIBSVM datasets***
+#### LIBSVM datasets
 
 ```julia
 data, labels = load_libsvm_dataset("mushrooms",1000);
 ```
 where ```dataset ∈ {"mushrooms", "a5a"}```.
 
+### Problem Models
 
 #### Linear regression
 
