@@ -54,11 +54,15 @@ f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
 
 ### First-Order algorithms
-The algorithms take as ***inputs***
+The algorithms take as ***inputs***:
 1. ```f```: The objective function
 2. ```oracle```: A function that returns a (sub)gradient of the function we want to minimize
-3. ```L```: Smoothness parameter
-4. ```μ```: Strong-convexity parameter
+3. ```∇ϕσ_cjg```: The dual projection function. 
+4. ```x_0```: The initial vector
+5. ```σ```: The strong convexity parameter of the prox-function ϕ
+6. ```L```: Smoothness parameter
+7. ```μ```: Strong-convexity parameter
+8. ```k```: The number of iterations the algorithm will run
 
 The algorithms ***output*** is an object of the type ```Sequence```. The optimal value can be accessed through the field ```optval```. The sequence of approximate solutions can be accessed through the field ``fs``.
 #### Mirror-Descent
