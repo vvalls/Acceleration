@@ -85,7 +85,10 @@ AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k)
 ```
 ## Oracles
 We can load different oracles that use the ```oracle``` defined earlier. 
-```
+```julia
 include "oracles.jl"
 ```
-### Stochastic gradient
+1.  Gaussian Noise
+2.  Random Sparsification
+3.  Random Dithering
+4.  Natural Compression
