@@ -30,6 +30,5 @@ plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 data, labels, m, n = load_dataset(dataset,labels,m,n);
 ```
 where 
-```julia 
-dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}
+```julia dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}
 ```
