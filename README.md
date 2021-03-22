@@ -23,18 +23,18 @@ using Plots
 plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
-## Functions
+# Functions
 
-### Problem Models
+## Problem Models
 
 The following are a few examples of how to create problems models. Some are for supervised learning, and take as input a ```data``` matrix and a vector of ```labels```. 
 
-#### Linear regression
+### Linear regression
 
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels)
 ```
-#### Logistic regression
+### Logistic regression
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
@@ -46,7 +46,7 @@ where ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to
 
 
 
-### First-Order Algorithms
+## First-Order Algorithms
 The algorithms take as ***inputs***:
 1. ```f```: The objective function to minimize
 2. ```oracle```: A procedure that returns a (sub)gradient of ```f``` at the queried point
@@ -58,26 +58,26 @@ The algorithms take as ***inputs***:
 8. ```k```: The number of iterations the algorithm will run
 
 The algorithms ***output*** is an object of the type ```Sequence```. The optimal value can be accessed through the field ```optval```. The sequence of approximate solutions can be accessed through the field ``fs``.
-#### Mirror-Descent
+### Mirror-Descent
 ```julia
 MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```
 
-#### Accelerated Mirror Descent
+### Accelerated Mirror Descent
 This algorithm was proposed by Cohen et al. at ICML 2018 ([link](http://proceedings.mlr.press/v80/cohen18a/cohen18a.pdf)) for miniming L-smooth convex functions. 
 ```julia
 AMD_plus(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```
 
-#### μAccelerated Mirror Descent
+### μAccelerated Mirror Descent
 ```julia
 μAMD_plus(f,oracle,∇ϕ_cjg,x_0,L,μ,k)
 ```
 
-#### Accelerated Gradient Method
+### Accelerated Gradient Method
 ```julia
 AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k)
 ```
-## Oracles
+# Oracles
 
-### Stochastic gradient
+## Stochastic gradient
