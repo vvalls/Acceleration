@@ -37,5 +37,5 @@ where
 #### Linear regression
 
 ```julia
-f,oracle,∇ϕ_cjg,σ,L,μ  = inear_regression(data,labels)
+f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels)
 ```
