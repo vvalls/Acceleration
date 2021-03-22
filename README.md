@@ -60,7 +60,7 @@ The algorithms return an object ```Sequence```. The optimal value can be accesse
 MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```
 #### Accelerated Mirror Descent
-This algorithm was proposed by Cohen et al. at ICML 2018 [link](http://proceedings.mlr.press/v80/cohen18a/cohen18a.pdf).
+This algorithm was proposed by Cohen et al. at ICML 2018 ([paper](http://proceedings.mlr.press/v80/cohen18a/cohen18a.pdf)).
 ```julia
 AMD_plus(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```
