@@ -23,9 +23,9 @@ using Plots
 plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
-## Functions
+## Package functions
 
-### Loading datasets
+### Datasets
 
 #### Image datasets
 ```julia
@@ -41,7 +41,7 @@ data, labels = load_libsvm_dataset("mushrooms",1000);
 ```
 where ```dataset ∈ {"mushrooms", "a5a"}```.
 
-### Machine learning models
+### Problem models
 
 #### Linear regression
 
