@@ -29,4 +29,4 @@ plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```julia
 data, labels, m, n = load_dataset(dataset,labels,m,n);
 ```
-where ```dataset ∈ {MNIST, FashionMNIST, CIFAR-10}```  
+where ```dataset```$\in \{MNIST, FashionMNIST, CIFAR-10\}$.  
