@@ -1,6 +1,6 @@
 # Acceleration.jl
 
-This repository contains a Julia package with multiple first-order algorithms for solving (non)-convex programs. The following is quick example of how to use the package:
+This repository contains a Julia package with multiple first-order algorithms for (non)-convex programs. The following is quick example of how to use the package:
 
 ```julia
 using Acceleration
