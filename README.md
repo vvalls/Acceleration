@@ -1,26 +1,25 @@
 # Acceleration.jl
 
-This repository contains a Julia package with multiple accelerated algorithms for distributed learning. The following is quick example of how to use the package:
+This repository contains a Julia package with multiple first-order algorithms for distributed learning. The following is quick example of how to use the package:
 
 ```julia
 using Acceleration
 
-num_samples = 1000;
-num_features = 100;
+num_samples = 500;
+num_features = 20;
 labels = [0,1]
 dataset = "CIFAR-10" #MNIST, FashionMNIST, CIFAR-10
+data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
 
-data, labels = load_dataset(dataset,labels,num_samples,num_features);
-f,∇f,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels);
+f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels);
+x_0 = zeros(n);
+k = 10000;
 
-k = 1000
-x_ini = zeros(num_features)
+f_star = AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,2*k).optval;
+p = AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k).fs .-f_star;
 
-function gradient_fun(x)
-    return ∇f(x), 0
-end
-
-@time f_y = ufom(f,gradient_fun,∇ϕ_cjg,x_ini,σ,L,μ,k,Inf,false)[end]
+using Plots
+plot(p, yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
 See the Jupyter notebook "ICML Experiments" for several examples on how to use the algorithms with different ML models and datasets.
