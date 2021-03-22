@@ -78,3 +78,6 @@ AMD_plus(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```julia
 AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k)
 ```
+## Oracles
+
+### Stochastic gradient
