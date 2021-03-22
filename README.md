@@ -31,3 +31,5 @@ data, labels, m, n = load_dataset(dataset,labels,m,n);
 ```
 where 
 ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to select the ```labels``` to use in the data set, and the number of samples ```m``` and features ```n```.
+
+### Machine learning models
