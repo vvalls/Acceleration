@@ -22,4 +22,6 @@ using Plots
 plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
-See the Jupyter notebook "ICML Experiments" for several examples on how to use the algorithms with different ML models and datasets.
+## Functions
+
+### Loading datasets
