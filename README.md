@@ -30,4 +30,4 @@ plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 data, labels, m, n = load_dataset(dataset,labels,m,n);
 ```
 where 
-```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}``` and ```labels``` is an array with the labels to use from the dataset. Parameters ```m``` and ```n``` are, respectively, the number of samples and features we want to load from the data set.
+```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to select the ```labels``` to use in the data set, and the number of samples ```m``` and features ```n```.
