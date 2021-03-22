@@ -5,11 +5,12 @@ This repository contains a Julia package with multiple first-order algorithms fo
 ```julia
 using Acceleration
 
-num_samples = 500;
-num_features = 20;
+m = 500; # number of samples
+n = 20;  # number of variables/features
+
 labels = [0,1]
 dataset = "CIFAR-10" #MNIST, FashionMNIST, CIFAR-10
-data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
+data, labels, m, n = load_dataset(dataset,labels,m,n);
 
 f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels);
 x_0 = zeros(n);
@@ -26,5 +27,6 @@ plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 
 ### Loading datasets
 ```julia
-data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
+data, labels, m, n = load_dataset(dataset,labels,m,n);
 ```
+where ```dataset``` is 
