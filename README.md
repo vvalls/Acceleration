@@ -59,12 +59,17 @@ The algorithms return an object ```Sequence```. The optimal value can be accesse
 ```julia
 MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```
-### Accelerated Mirror Descent
+#### Accelerated Mirror Descent
 ```
 AMD_plus(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```
 
-### μAccelerated Mirror Descent (μ-strongly convex objectives)
+#### μAccelerated Mirror Descent (μ-strongly convex objectives)
 ```
 μAMD_plus(f,oracle,∇ϕ_cjg,x_0,L,μ,k)
+```
+
+#### Accelerated Gradient Method 
+```
+AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k)
 ```
