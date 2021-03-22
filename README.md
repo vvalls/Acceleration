@@ -84,5 +84,8 @@ AMD_plus(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k)
 ```
 ## Oracles
-
+We can load different oracles that use the ```oracle``` defined earlier. 
+```
+include "oracles.jl"
+```
 ### Stochastic gradient
