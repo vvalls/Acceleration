@@ -53,4 +53,4 @@ f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels)
 f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
 
-### First-Order Algorithms
+### First-Order algorithms
