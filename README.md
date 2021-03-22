@@ -54,8 +54,17 @@ f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
 
 ### First-Order algorithms
-The algorithms return an object ```Sequence```. The 
+The algorithms return an object ```Sequence```. The optimal value can be accessed through the field ```optval```.
 #### Mirror-Descent
 ```julia
 MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
+```
+### Accelerated Mirror Descent
+```
+AMD_plus(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
+```
+
+### μAccelerated Mirror Descent (μ-strongly convex objectives)
+```
+μAMD_plus(f,oracle,∇ϕ_cjg,x_0,L,μ,k)
 ```
