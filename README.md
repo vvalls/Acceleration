@@ -9,7 +9,7 @@ num_samples = 500;  # number of data samples
 num_features = 20;  # number of variables/features
 
 labels = [0,1]
-dataset = "CIFAR-10" #MNIST, FashionMNIST, CIFAR-10
+dataset = "CIFAR-10"
 data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
 
 f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels);
