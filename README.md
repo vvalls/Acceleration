@@ -23,7 +23,7 @@ using Plots
 plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
-## Package functions
+## Package Functions
 
 ### Datasets
 
@@ -41,7 +41,7 @@ data, labels = load_libsvm_dataset("mushrooms",1000);
 ```
 where ```dataset ∈ {"mushrooms", "a5a"}```.
 
-### Problem models
+### Problem Models
 
 #### Linear regression
 
@@ -53,7 +53,7 @@ f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels)
 f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
 
-### First-Order algorithms
+### First-Order Algorithms
 The algorithms take as ***inputs***:
 1. ```f```: The objective function to minimize
 2. ```oracle```: A procedure that returns a (sub)gradient of ```f``` at the queried point
@@ -66,9 +66,8 @@ The algorithms take as ***inputs***:
 
 The algorithms ***output*** is an object of the type ```Sequence```. The optimal value can be accessed through the field ```optval```. The sequence of approximate solutions can be accessed through the field ``fs``.
 #### Mirror-Descent
-```julia
-MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
-```
+..*```MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)```
+..*```MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)```
 #### Accelerated Mirror Descent
 This algorithm was proposed by Cohen et al. at ICML 2018 ([link](http://proceedings.mlr.press/v80/cohen18a/cohen18a.pdf)) for miniming L-smooth convex functions. 
 ```julia
