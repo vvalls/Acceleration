@@ -54,6 +54,11 @@ f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
 
 ### First-Order algorithms
+The algorithms take as inputs
+1. ```f```: The objective function
+2. ```oracle```: A function that returns a (sub)gradient of the function we want to minimize
+3. ```L```: Smoothness parameter
+4. ```μ```: Strong-convexity parameter
 The algorithms return an object ```Sequence```. The optimal value can be accessed through the field ```optval```. The sequence of approximate solutions can be accessed through the field ``fs``.
 #### Mirror-Descent
 ```julia
