@@ -54,3 +54,8 @@ f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
 
 ### First-Order algorithms
+The algorithms return an object ```Sequence```. The 
+#### Mirror-Descent
+```julia
+MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
+```
