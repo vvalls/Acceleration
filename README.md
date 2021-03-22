@@ -1,6 +1,6 @@
 # Acceleration.jl
 
-This repository contains a Julia package with multiple first-order algorithms for convex programs. The following is quick example of how to use the package:
+This repository contains a Julia package with multiple first-order algorithms for convex programs. The following is quick example of how to use the packaget to solve a linear regression problem:
 
 ```julia
 using Acceleration
