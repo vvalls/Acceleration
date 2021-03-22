@@ -23,7 +23,7 @@ using Plots
 plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
-## Package Functions
+## Functions
 
 ### Problem Models
 
