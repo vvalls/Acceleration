@@ -39,3 +39,7 @@ where
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels)
 ```
+#### Logistic regression
+```julia
+f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
+```
