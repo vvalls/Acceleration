@@ -32,4 +32,4 @@ data, labels, m, n = load_dataset(dataset,labels,m,n);
 where 
 ```julia 
 dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}
-```.  
+```
