@@ -69,13 +69,12 @@ The algorithms ***output*** is an object of the type ```Sequence```. The optimal
 MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```
 
-### Accelerated Mirror Descent
+### (μ)Accelerated Mirror Descent
 This algorithm was proposed by Cohen et al. at ICML 2018 ([link](http://proceedings.mlr.press/v80/cohen18a/cohen18a.pdf)) for miniming L-smooth convex functions. 
 ```julia
 AMD_plus(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
 ```
-
-### μAccelerated Mirror Descent
+For L-smooth and μ-strongly convex function the algorithm is:
 ```julia
 μAMD_plus(f,oracle,∇ϕ_cjg,x_0,L,μ,k)
 ```
