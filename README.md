@@ -30,7 +30,7 @@ plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 
 ## Objective/Loss functions
 
-The following are a few examples of how to create problems models. Some models take as input a ```data``` matrix and a vector of ```labels```. 
+The following are a few examples of how to create problems models. Some functions take as input a ```data``` matrix and a vector of ```labels```. 
 
 ### Quadratic 
 
@@ -54,14 +54,15 @@ f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 where ```data``` is an ```m``` by ```n``` data matrix, ```labels``` a ```n```-dimensional vector, and ```λ``` a non-negative scalar. 
 
 ## Datasets
-###Image datasets: 
+### Image datasets: 
 
 ```julia 
 data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
 ```
 where ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to select the ```labels``` to use in the data set, and the number of samples ```m``` and features ```n``` to load (i.e., we may load just a few data samples from the data set). 
 
-***LIBSVM datasets:*** ```data, labels = load_libsvm_dataset("mushrooms",1000);``` where ```dataset ∈ {"mushrooms", "a5a"}```.
+#### LIBSVM datasets:
+```data, labels = load_libsvm_dataset("mushrooms",1000);``` where ```dataset ∈ {"mushrooms", "a5a"}```.
 
 
 
