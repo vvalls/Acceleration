@@ -2,6 +2,9 @@
 
 This repository contains a Julia package with multiple first-order algorithms for convex programs. The package allows users to choose the subroutines that estimate the gradients. 
 
+$$
+AFASDEF
+$$
 
 * ${\color{blue}{\text{FOM}}}$
 * ${\color{purple}{\text{Oracle}}}$
