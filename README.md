@@ -3,10 +3,10 @@
 This repository contains a Julia package with multiple first-order algorithms for convex programs. The package allows users to choose the subroutines that estimate the gradients. 
 
 $$
-AFASDEF
+\text{Optimization} ( {\color{red}{Objective}}, Oracle, Parameters)
 $$
 
-* ${\color{blue}{\text{FOM}}}$
+* ${\color{blue}{\text{Objective}}}$
 * ${\color{purple}{\text{Oracle}}}$
 * ${\color{orange}{\text{Parameters}}}$
 
