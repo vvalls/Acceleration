@@ -1,12 +1,12 @@
 # Acceleration.jl
 
-This repository contains a Julia package with multiple first-order algorithms for convex programs. The package allows users to choose the subroutines that estimate the gradients. 
+This repository contains a Julia package with multiple first-order methods (FOMs) for convex programs. The package allows users to choose the subroutines that estimate the gradients. 
 
 $$
 \text{FOM} (Objective, Oracle, Parameters)
 $$
 
-* ${\color{blue}{\text{Objective}}}$
+* ***Objective***: 
 * ${\color{purple}{\text{Oracle}}}$
 * ${\color{orange}{\text{Parameters}}}$
 
