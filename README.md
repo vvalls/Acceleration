@@ -8,7 +8,7 @@ $$
 
 * ***Objective***: This is the mathematical function to optimize. 
 * ***Oracle:*** This is the subroutine that estimates gradients
-* ***Parameters:*** These are problem parameters. For example, the smoothness of the objective.
+* ***Parameters:*** These are problem and optimization parameters. For example, the smoothness of the objective or the termination criterion of the numerical method. 
 
 
 ## Quick example
