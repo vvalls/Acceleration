@@ -7,7 +7,7 @@ $$
 $$
 
 * ***Objective***: This is the mathematical function to optimize. The meaning of the function depends on the context; for example, a loss function in learning problems, or a utility function in network resource allocation. 
-* ***Oracle:*** This is the subroutine that estimates gradients. The choice of subroutine is problem dependent and affects the ***total*** running time of the numerical method. 
+* ***Oracle:*** This is the subroutine that estimates gradients. The choice of subroutine is problem dependent and affects the *total* running time of the numerical method. 
 * ***Parameters:*** These are problem and optimization parameters. For example, the smoothness of the objective or the termination criteria of the numerical method. 
 
 
