@@ -6,7 +6,7 @@ $$
 \text{\textbf{First-Ordet Method} (Objective, Oracle, Parameters)}
 $$
 
-* ***Objective***: This is the mathematical function to optimize. 
+* ***Objective***: This is the mathematical function to optimize.
 * ***Oracle:*** This is the subroutine that estimates gradients
 * ***Parameters:*** These are problem and optimization parameters. For example, the smoothness of the objective or the termination criteria of the numerical method. 
 
