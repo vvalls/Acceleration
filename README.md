@@ -119,3 +119,8 @@ include "oracles.jl"
 2.  Random Sparsification
 3.  Random Dithering
 4.  Natural Compression
+
+
+### Acknoledgements
+
+This work has received funding from the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No.\ 795244.
