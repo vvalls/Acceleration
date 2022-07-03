@@ -6,9 +6,9 @@ $$
 \text{FOM} (Objective, Oracle, Parameters)
 $$
 
-* ***Objective***: 
-* ${\color{purple}{\text{Oracle}}}$
-* ${\color{orange}{\text{Parameters}}}$
+* ***Objective***: This is the mathematical function to optimize. 
+* ***Oracle:*** This is the subroutine that estimates gradients
+* ***Parameters:*** These are problem parameters. For example, the smoothness of the objective.
 
 
 ## Quick example
