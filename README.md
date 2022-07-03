@@ -57,7 +57,7 @@ where ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to
 
 
 
-## First-Order Algorithms
+## First-Order Methods
 
 The package contains multiple first-order methods. The algorithms' inputs are:
 1. ```f```: The objective function to minimize
