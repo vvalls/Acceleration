@@ -1,6 +1,11 @@
 # Acceleration.jl
 
-This repository contains a Julia package with multiple first-order algorithms for convex programs. The following is quick example of how to use the packaget to solve a linear regression problem:
+This repository contains a Julia package with multiple first-order algorithms for convex programs. The package decouples the first-order method from how gradients are estimated.
+
+
+## Quick example
+
+Example of how to use the package to solve a linear regression problem:
 
 ```julia
 using Acceleration
@@ -53,7 +58,8 @@ where ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to
 
 
 ## First-Order Algorithms
-The algorithms take as ***inputs***:
+
+The package contains multiple first-order methods. The algorithms' inputs are:
 1. ```f```: The objective function to minimize
 2. ```oracle```: A procedure that returns a (sub)gradient of ```f``` at the queried point
 3. ```∇ϕσ_cjg```: The dual projection function. 
