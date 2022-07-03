@@ -28,13 +28,11 @@ using Plots
 plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
-## Functions
-
-### Problem Models
+## Objective/Loss functions
 
 The following are a few examples of how to create problems models. Some models take as input a ```data``` matrix and a vector of ```labels```. 
 
-#### Quadratic program
+### Quadratic 
 
 The function ```quadratic_program``` generates a quadratic function $f(x) = x^T A^T A x$ where $A \in \mathbf R^{m \times n}$ matrix. The entries of $A$ are generated uniformly at random. 
 
@@ -43,13 +41,13 @@ f,oracle,∇ϕ_cjg,σ,L,μ  = quadratic_program(m,n)
 ```
 where ```m``` and ```n``` are integers.
 
-#### Linear regression
+### Linear regression
 
 The function ```linear_regression``` generates a loss function of the form $f(x) = \| Ax - b \|^2$ where $A$ is the input data matrix, and $b$ the labels.
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels)
 ```
-#### Logistic regression
+### Logistic regression
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
