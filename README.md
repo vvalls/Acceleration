@@ -35,7 +35,7 @@ using Plots
 plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
-## 1. Loading Programs
+## 1. Loading programs
 
 The following are a few examples of how to create problems models. Some functions take as input a ```data``` matrix and a vector of ```labels```. 
 
