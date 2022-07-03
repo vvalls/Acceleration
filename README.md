@@ -36,7 +36,8 @@ The following are a few examples of how to create problems models. Some models t
 
 ### Quadratic program
 
-The function ```quadratic_program``` generates a quadratic program of the form $x^T A^T A x$ where $A$ is an $m$ by $n$ matrix. 
+The function ```quadratic_program``` generates a quadratic function $f(x) = x^T A^T A x$ where $A$ is an $m$ by $n$ matrix. The entries of $A$ are generated uniformly at random. 
+
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ  = quadratic_program(m,n)
 ```
