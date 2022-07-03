@@ -84,12 +84,12 @@ The package contains multiple first-order methods. The algorithms' inputs are:
 
 1. ```f```: The objective function to minimize
 2. ```oracle```: A procedure that returns a (sub)gradient of ```f``` at the queried point
-3a. ```∇ϕσ_cjg```: The dual projection function. 
-3b. ```x_0```: The initial vector
-3c. ```σ```: The strong convexity parameter of the prox-function ϕ
-3d. ```L```: Smoothness parameter of the objective function
-3e. ```μ```: Strong-convexity parameter of the objective function
-3f. ```k```: The number of iterations the algorithm will run
+3. ```∇ϕσ_cjg```: The dual projection function. 
+4. ```x_0```: The initial vector
+5. ```σ```: The strong convexity parameter of the prox-function ϕ
+6. ```L```: Smoothness parameter of the objective function
+7. ```μ```: Strong-convexity parameter of the objective function
+8. ```k```: The number of iterations the algorithm will run
 
 The algorithms ***output*** is an object of the type ```Sequence```. The optimal value can be accessed through the field ```optval```. The sequence of approximate solutions can be accessed through the field ``fs``.
 ### Mirror-Descent
