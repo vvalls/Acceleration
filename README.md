@@ -1,6 +1,6 @@
 # Acceleration.jl
 
-This repository contains a Julia package with multiple first-order methods (FOMs) to solve convex programs. The package allows users to load a convex program and choose the subroutines that estimates gradients. 
+This repository contains a Julia package with multiple first-order methods (FOMs) to solve convex programs. The package allows users to load a convex program and choose the subroutines that estimates gradients (e.g., data sampling).
 
 $$
 \text{\textbf{First-Ordet Method} (Objective, Oracle, Parameters)}
