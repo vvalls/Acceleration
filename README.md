@@ -48,13 +48,13 @@ f,oracle,∇ϕ_cjg,σ,L,μ  = quadratic_program(m,n)
 ```
 where ```m``` and ```n``` are integers.
 
-### Linear regression program
+### Linear regression
 
 The function ```linear_regression``` generates a loss function of the form $f(x) = || Ax - b \||^2$ where $A$ is the input data matrix, and $b$ the labels.
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels)
 ```
-### Logistic regression program
+### Logistic regression
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
