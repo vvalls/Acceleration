@@ -1,6 +1,6 @@
 # Acceleration.jl
 
-This repository contains a Julia package with multiple first-order algorithms for convex programs. The package decouples the first-order method from how gradients are estimated.
+This repository contains a Julia package with multiple first-order algorithms for convex programs. The package allows users to choose the subroutines that estimate the gradients. 
 
 
 ## Quick example
