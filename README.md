@@ -11,11 +11,10 @@ $$
 * ***Parameters:*** These are problem and optimization parameters. For example, the smoothness of the objective or the termination criteria of the numerical method. 
 
 
-## Quick example
-
-Example of how to use the package to solve a linear regression problem:
+### Quick example
 
 ```julia
+# Linear regression problem with CIFAR-10 dataset
 using Acceleration
 
 num_samples = 500;  # number of data samples
