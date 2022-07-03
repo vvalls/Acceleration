@@ -60,7 +60,7 @@ data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
 ```
 where ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to select the ```labels``` to use in the data set, and the number of samples ```m``` and features ```n``` to load (i.e., we may load just a few data samples from the data set). 
 
-#### LIBSVM datasets:
+### LIBSVM datasets:
 ```
 julia 
 data, labels = load_libsvm_dataset("mushrooms",1000);
