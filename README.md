@@ -72,8 +72,7 @@ where ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to
 
 The LIBSVM datasets:
 
-```
-julia 
+```julia
 data, labels = load_libsvm_dataset("mushrooms",1000);
 ``` 
 where ```dataset ∈ {"mushrooms", "a5a"}```. The original mushroom and a5a datasets (https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/) have been formtted in a matrix form. 
