@@ -62,13 +62,18 @@ data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
 where ```dataset ∈ {"MNIST", "FashionMNIST", "CIFAR-10"}```. It is possible to select the ```labels``` to use in the data set, and the number of samples ```m``` and features ```n``` to load (i.e., we may load just a few data samples from the data set). 
 
 #### LIBSVM datasets:
-```data, labels = load_libsvm_dataset("mushrooms",1000);``` where ```dataset ∈ {"mushrooms", "a5a"}```.
+```
+julia 
+data, labels = load_libsvm_dataset("mushrooms",1000);
+``` 
+where ```dataset ∈ {"mushrooms", "a5a"}```. The original mushroom and a5a datasets (https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/) have been formtted in a matrix form. 
 
 
 
 ## First-Order Methods
 
 The package contains multiple first-order methods. The algorithms' inputs are:
+
 1. ```f```: The objective function to minimize
 2. ```oracle```: A procedure that returns a (sub)gradient of ```f``` at the queried point
 3. ```∇ϕσ_cjg```: The dual projection function. 
