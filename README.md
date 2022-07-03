@@ -35,10 +35,12 @@ plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 The following are a few examples of how to create problems models. Some models take as input a ```data``` matrix and a vector of ```labels```. 
 
 ### Quadratic program
+
+The function ```quadratic_program``` generates a quadratic program of the form $x^T A^T A x$ where $A$ is an $m$ by $n$ matrix. 
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ  = quadratic_program(m,n)
 ```
-where ```m``` and ```n``` are integers. 
+where ```m``` and ```n``` are integers.
 
 ### Linear regression
 
