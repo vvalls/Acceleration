@@ -43,7 +43,7 @@ where ```m``` and ```n``` are integers.
 
 ### Linear regression
 
-The function ```linear_regression``` generates a loss function of the form $f(x) = \| Ax - b \|^2$ where $A$ is the input data matrix, and $b$ the labels.
+The function ```linear_regression``` generates a loss function of the form $f(x) = || Ax - b \||^2$ where $A$ is the input data matrix, and $b$ the labels.
 ```julia
 f,oracle,∇ϕ_cjg,σ,L,μ  = linear_regression(data,labels)
 ```
