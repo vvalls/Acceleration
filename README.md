@@ -121,6 +121,6 @@ include "oracles.jl"
 4.  Natural Compression
 
 
-### Acknoledgements
+# Acknoledgements
 
 This work has received funding from the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No.\ 795244.
