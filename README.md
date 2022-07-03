@@ -28,7 +28,7 @@ using Plots
 plot(max.(p,1e-12), yaxis=:log, xlabel="k", ylabel="f(y)- f*")
 ```
 
-## Objective/Loss functions
+## 1. Objective functions and Loading datasets
 
 The following are a few examples of how to create problems models. Some functions take as input a ```data``` matrix and a vector of ```labels```. 
 
@@ -53,7 +53,6 @@ f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
 where ```data``` is an ```m``` by ```n``` data matrix, ```labels``` a ```n```-dimensional vector, and ```λ``` a non-negative scalar. 
 
-## Datasets
 ### Image datasets: 
 
 ```julia 
@@ -70,7 +69,7 @@ where ```dataset ∈ {"mushrooms", "a5a"}```. The original mushroom and a5a data
 
 
 
-## First-Order Methods
+## 2. First-Order Methods
 
 The package contains multiple first-order methods. The algorithms' inputs are:
 
@@ -103,7 +102,7 @@ For L-smooth and μ-strongly convex function the algorithm is:
 ```julia
 AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k)
 ```
-## Oracles
+## 3. Oracles
 We can load different oracles that use the ```oracle``` defined earlier. 
 ```julia
 include "oracles.jl"
