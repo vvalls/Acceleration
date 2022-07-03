@@ -63,7 +63,7 @@ where ```data``` is an ```m``` by ```n``` data matrix, ```labels``` a ```n```-di
 
 ### Datasets: 
 
-Image datasets
+Image datasets:
 
 ```julia 
 data, labels, m, n = load_dataset(dataset,labels,num_samples,num_features);
