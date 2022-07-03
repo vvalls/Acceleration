@@ -3,7 +3,7 @@
 This repository contains a Julia package with multiple first-order methods (FOMs) for convex programs. The package allows users to choose the subroutines that estimate the gradients. 
 
 $$
-\text{FOM (Objective, Oracle, Parameters)}
+\text{\textbf{First-Ordet Method} (Objective, Oracle, Parameters)}
 $$
 
 * ***Objective***: This is the mathematical function to optimize. 
