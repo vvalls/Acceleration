@@ -61,7 +61,7 @@ f,oracle,∇ϕ_cjg,σ,L,μ = logistic_regression(data,labels,λ);
 ```
 where ```data``` is an ```m``` by ```n``` data matrix, ```labels``` a ```n```-dimensional vector, and ```λ``` a non-negative scalar. 
 
-### Datasets: 
+### Datasets
 
 Image datasets:
 
