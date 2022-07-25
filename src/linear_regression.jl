@@ -19,8 +19,8 @@ function linear_regression(data,labels)
     end
 
     # ϕ = 0.5*|z|^2
-    function ∇ϕ_cjg(z)
-        return z;
+    function ∇ϕ_cjg(seq)
+        return (seq.s .+ seq.μ*seq.AX)*inv(seq.σ + seq.μ*seq.A);
     end
 
     L = eigvals(A'*A)[n];         # largest eigenvalue

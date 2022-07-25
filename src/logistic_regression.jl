@@ -11,7 +11,6 @@ function logistic_regression(data,labels,λ)
 
     A = data; b = labels;
 
-    # f(x) = |Ax - b|^2
     function f(x)
         return sum(log.(1 .+ exp.(-b.*(A*x)))) + (λ/2)*norm(x,2)^2
     end
@@ -21,8 +20,8 @@ function logistic_regression(data,labels,λ)
     end
 
     # ϕ = 0.5*|z|^2
-    function ∇ϕ_cjg(z)
-        return z;
+    function ∇ϕ_cjg(seq)
+        return (seq.s .+ seq.μ*seq.AX)*inv(seq.σ + seq.μ*seq.A);
     end
 
     L = eigvals(A'*A)[n];         # largest eigenvalue

@@ -1,9 +1,0 @@
-# color definitions
-set border linewidth 1.5
-set style line 1 lc rgb '#1b9e77' lt 1 lw 2
-set style line 2 lc rgb '#d95f02' lt 1 lw 2
-set style line 3 lc rgb '#7570b3' lt 1 lw 2
-set style line 4 lc rgb '#e7298a' lt 1 lw 2
-set style line 5 lc rgb '#66a61e' lt 1 lw 2
-set style line 6 lc rgb '#e6ab02' lt 1 lw 2
-set style line 7 lc rgb '#a6761d' lt 1 lw 2

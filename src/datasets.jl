@@ -28,7 +28,7 @@ function load_dataset(dataset, labels_subset, num_samples, num_features)
         #iris = RDatasets.dataset("datasets", "iris")
         #labels = [species == "versicolor" ? 1.0 : -1.0 for species in iris.Species]
         #data = hcat(ones(size(iris, 1)), iris.SepalLength, iris.SepalWidth, iris.PetalLength, iris.PetalWidth);
-        return data, labels
+        return data, labels, m, n
     else
         loaded_data, loaded_labels = MNIST.traindata()
         @warn("Dataset doesn't exists. Loading MNIST instead.")
@@ -59,6 +59,8 @@ function load_dataset(dataset, labels_subset, num_samples, num_features)
     PC = E[1:num_features,:]'
     data = Float64.(PC'*samples)'
 
-    return data, labels
+    m, n =  size(data)
+
+    return data, labels, m, n
 
 end

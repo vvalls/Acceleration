@@ -23,7 +23,8 @@ function load_libsvm_dataset(dataset_name, num_samples)
     labels = loaded_labels[1:n_samples];
 
     @info(string("Loading dataset ",dataset_name," with ", n_samples, " samples (out ouf ", m ,") and ", n ," features"))
+    m,n = size(data);
 
-    return data, labels
+    return data, labels, m, n
 
 end

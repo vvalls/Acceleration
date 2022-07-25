@@ -1,110 +1,107 @@
-### Mirror descent
-function MD(f,∇f,∇ϕ_cjg,x_ini,σ,L,k);
-    n = length(x_ini)
-    x = x_ini;
-    z = zeros(n);
-    sumx = zeros(n);
-    A = 0;
+mutable struct Sequences
+    L
+    μ
+    σ
+    x
+    y
+    α
+    s
+    A
+    AX
+    X
+    fs
+    optval
+    norm_∇f
+end
 
-    f_val = zeros(k);
+### Mirror descent
+function MD(f,oracle,∇ϕ_cjg,x_0,σ,L,k);
+    n = length(x_0)
+    x = x_0;
+    s = zeros(n);
+    A = 0;
+    seq = Sequences(L,0,σ,zeros(n,k),zeros(n,k),zeros(k),0,0,zeros(n),zeros(n),Inf*ones(k),Inf,0)
 
     for i=1:k
         α = (σ/L)*inv(sqrt(i));
         A = A + α;
-        gradient, ξ = ∇f(x)
-        z = z - α*gradient;
-        x = ∇ϕ_cjg(z);
-        sumx = sumx + α*x;
+        ∇f = oracle(x)
+        s = s - α*∇f;
+        x = ∇ϕ_cjg(seq);
+        y = x;
 
-        f_val[i] = f(sumx/A)
+        seq.x[:,i] = x; seq.y[:,i] = y; seq.α[i] = α; seq.s = s;
+        seq.A = A; seq.AX = seq.AX + α*x; seq.X = seq.X + x;
+        seq.fs[i] = f(y); seq.optval = f(y); seq.norm_∇f = ∇f'*∇f;
     end
-
-    return f_val;
+    return seq;
 end
 
-### Projected gradient descent (with averaging)
-function PGD_avg(f,∇f,∇ϕ_cjg,x_ini,σ,L,k)
-    n = length(x_ini)
-    x = x_ini;
+
+### Gradient descent
+function GD(f,oracle,x_0,σ,L,k)
+    n = length(x_0)
+    x = x_0;
+    seq = Sequences(L,0,σ,zeros(n,k),zeros(n,k),zeros(k),0,0,zeros(n),zeros(n),Inf*ones(k),Inf,0)
+
+    for i=1:k
+        α = (σ/L);
+        ∇f = oracle(x)
+        x = x - α*∇f;
+        s = x;
+        y = x;
+
+        seq.x[:,i] = x; seq.y[:,i] = y; seq.α[i] = α; seq.s = s;
+        seq.A = A; seq.AX = seq.AX + α*x; seq.X = seq.X + x;
+        seq.fs[i] = f(y); seq.optval = f(y);
+    end
+
+    return seq;
+end
+
+
+### Accelerated mirror descent (ICML 2018)
+function AMD_plus(f,oracle,∇ϕ_cjg,x_0,σ,L,k)
+    n = length(x_0)
+    x = x_0;
+    y = x_0;
     z = zeros(n);
-    sumx = zeros(n);
     A = 0;
 
-    f_val = zeros(k);
-
-    for i=1:k
-        α = (σ/L);
-        A = A + α;
-        gradient, ξ = ∇f(x)
-        z = z - α*gradient;
-        x = ∇ϕ_cjg(z);
-        sumx = sumx + α*x;
-
-        f_val[i] = f(sumx/A)
-    end
-
-    return f_val;
-end
-
-### Gradient descent (with averaging)
-function GD(f,∇f,x_ini,σ,L,k)
-    n = length(x_ini)
-    x = x_ini;
-    f_val = zeros(k);
-
-    for i=1:k
-        α = (σ/L);
-        gradient, ξ = ∇f(x)
-        x = x - α*gradient;
-
-        f_val[i] = f(x)
-    end
-
-    return f_val;
-end
-
-
-### Accelerated mirror descent + (ICML 2018)
-function AMD_plus(f,∇f,∇ϕ_cjg,x_ini,σ,L,k)
-    n = length(x_ini)
-    x = x_ini;
-    y = zeros(n);
-    z = zeros(n);
-    A0 = 0;
-    A = A0;
-
-    f_val = zeros(k);
+    seq = Sequences(L,0,σ,zeros(n,k),zeros(n,k),zeros(k),0,0,zeros(n),zeros(n),Inf*ones(k),Inf,0)
 
     for i=1:k
         α = (σ/L)*(i+1)/2;
         A = A + α;
-        x = (A-α)*inv(A)*y + α*inv(A)*∇ϕ_cjg(z);
-        gradient, ξ = ∇f(x)
-        z = z - α*gradient;
-        y = (A-α)*inv(A)*y + α*inv(A)*∇ϕ_cjg(z);
+        seq.α[i] = α; seq.A = A;
 
-        f_val[i] = f(y)
+        x = (A-α)*inv(A)*y + α*inv(A)*∇ϕ_cjg(seq);
+        ∇f = oracle(x)
+        z = z - α*∇f;
+        seq.x[:,i] = x; seq.s = z; seq.AX = seq.AX + α*x; seq.X = seq.X + x;
+
+        y = (A-α)*inv(A)*y + α*inv(A)*∇ϕ_cjg(seq);
+        seq.y[:,i] = y; seq.fs[i] = f(y); seq.optval = f(y); seq.norm_∇f = ∇f'*∇f;
     end
 
-    return f_val;
+    return seq;
 end
 
 
 
 ### AMD with a strongly convex objective
-function μAMD_plus(f,∇f,∇ϕ_cjg,x_ini,L,μ,k)
-    n = length(x_ini)
-    x = x_ini;
+function μAMD_plus(f,oracle,∇ϕ_cjg,x_0,L,μ,k)
+    n = length(x_0)
+    x = x_0;
     y = zeros(n);
     z = zeros(n);
     v = zeros(n);
-    A0 = 0;
-    A = A0;
+    A = 0;
     AX = zeros(n);
     σ = L - μ;
     α = 1;
 
-    f_val = zeros(k);
+    seq = Sequences(L,μ,σ,zeros(n,k),zeros(n,k),zeros(k),0,0,zeros(n),zeros(n),Inf*ones(k),Inf,0)
 
     for i=1:k
 
@@ -116,52 +113,56 @@ function μAMD_plus(f,∇f,∇ϕ_cjg,x_ini,L,μ,k)
         θ = α * inv(A);
         x = inv(1+θ)*y + θ*inv(1+θ)*v;
         AX = AX + α*x;
-        gradient, ξ = ∇f(x);
-        z = z - α*gradient;
-        v = (z + μ*AX)*inv((L-μ) + μ*(A-A0));
+        ∇f = oracle(x);
+        z = z - α*∇f ;
+        v = (z + μ*AX)*inv((L-μ) + μ*A);
         y = (1-θ)*y + θ*v;
 
-        f_val[i] = f(y)
+        seq.x[:,i] = x; seq.y[:,i] = y; seq.α[i] = α; seq.s = z;
+        seq.A = A; seq.AX = seq.AX + α*x; seq.X = seq.X + x;
+        seq.fs[i] = f(y); seq.optval = f(y); seq.norm_∇f = ∇f'*∇f;
     end
 
-    return f_val;
+    return seq;
 end
 
 ### Unified accelerated algorithm
-function ufom(f,∇f,∇ϕ_cjg,x_ini,σ,L,μ,k,p)
-    n = length(x_ini)
-    x = x_ini;
+function AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k,λ,p)
+    n = length(x_0)
+    x = x_0;
     y = zeros(n);
-    z = zeros(n);
+    s = zeros(n);
     v = zeros(n);
-    A0 = σ/(2*L)
-    A =  A0;
+    A = 0;
+    α = 0;
     AX = zeros(n);
 
-    f_val = zeros(k);
+    seq = Sequences(L,μ,σ,zeros(n,k),zeros(n,k),zeros(k),0,0,zeros(n),zeros(n),Inf*ones(k),Inf,0)
 
     for i=1:k
-        λ = min(L/μ *(p/i)^2,1);
-        a = L-μ; b = -λ*(μ*A + σ); c = -λ*(μ*A^2 + σ*A);
-        α = (-b + sqrt(b^2 - 4*a*c)) / (2*a);
+        λ2 = λ * min(L*p^2  / (μ * i^2) ,1);
+        β = λ2*(μ*(A-α) + σ/2);
+        α = inv(L-μ) * (β + sqrt(β^2 + (L-μ)*λ2*(μ*(A-α)^2 + σ*(A-α))));
         A = A + α;
-        x = (A-α)*inv(A)*y + α*inv(A)*v;
-        AX = AX + α*x;
-        gradient, ξ = ∇f(x)
-        z = z - α*gradient;
-        v_past = v;
-        v = (z + μ*AX)*inv(1 + μ*(A-A0));
-        y = (A-α)*inv(A)*y + α*inv(A)*v; # Nesterov's update for l_2 and C = R^n: y = x - inv(L)*∇f(x);
+        seq.α[i] = α; seq.A = A;
 
-        f_val[i] = f(y)
+        x = (μ*A + σ)*(A-α) / (μ*(A-α)*(A+α) + σ*A) * y + (μ*(A-α) + σ)*α / (μ*(A-α)*(A+α) + σ*A) * v;
+        AX = AX + α*x;
+        ∇f = oracle(x);
+        s = s - α*∇f;
+        seq.x[:,i] = x; seq.s = s; seq.AX = seq.AX + α*x; seq.X = seq.X + x;
+
+        v = ∇ϕ_cjg(seq);
+        y = (A-α)*inv(A)*y + α*inv(A)*v;
+        seq.y[:,i] = y; seq.fs[i] = f(y); seq.optval = min(seq.optval,f(y)); seq.norm_∇f = ∇f'*∇f;
     end
 
-    return f_val;
+    return seq;
 end
 
 #### ACGD Algorithm (ICML 2020)
-function ACGD(f,∇f,x_ini,L,k,ω)
-    n = length(x_ini)
+function ACGD(f,oracle,x_0,L,k,ω)
+    n = length(x_0)
     x = zeros(n);
     y = zeros(n);
     z = zeros(n);
@@ -176,8 +177,8 @@ function ACGD(f,∇f,x_ini,L,k,ω)
         γ = 2*p / (i+2);
 
         x = θ*y + (1-θ)*z;
-        g, ξ = ∇f(x)
-        y = x - (η/p)*g;
+        ∇f = oracle(x)
+        y = x - (η/p)*∇f;
         z = (1/γ)*y + (1/p - 1/γ)*y + (1-1/p)*(1-β)*z + (1-1/p)*β*x;
         f_val[i] = f(x)
     end
@@ -186,8 +187,8 @@ function ACGD(f,∇f,x_ini,L,k,ω)
 end
 
 #### ACGD Algorithm (ICML 2020) for strongly convex objective
-function μACGD(f,∇f,x_ini,L,μ,k,ω)
-    n = length(x_ini)
+function μACGD(f,oracle,x_0,L,μ,k,ω)
+    n = length(x_0)
     x = zeros(n);
     y = zeros(n);
     z = zeros(n);
@@ -202,8 +203,8 @@ function μACGD(f,∇f,x_ini,L,μ,k,ω)
         γ = sqrt(μ/L)
 
         x = θ*y + (1-θ)*z;
-        g, ξ = ∇f(x)
-        y = x - (η/p)*g;
+        ∇f = oracle(x)
+        y = x - (η/p)*∇f;
         z = (1/γ)*y + (1/p - 1/γ)*y + (1-1/p)*(1-β)*z + (1-1/p)*β*x;
         f_val[i] = f(y)
     end
@@ -213,23 +214,23 @@ end
 
 
 # Original Nesterov's AGD
-function Nesterov83(f,∇f,x_ini,k)
+function Nesterov83(f,oracle,x_0,k)
 
-    n = length(x_ini);
+    n = length(x_0);
     f_val = zeros(k);
 
-    y = x_ini;
+    y = x_0;
     a = 1;
     x = y;
     z = rand(n);
-    α = norm(y.-z,2) / norm(∇f(y).-∇f(z),2)
+    α = norm(y.-z,2) / norm(oracle(y).-oracle(z),2)
 
     for i=1:k
 
         lo = 0.0;
         up = Inf;
         j = lo
-        grad, ξ = ∇f(y);
+        grad = oracle(y);
         e = 1;
 
         t = 0;
@@ -259,4 +260,30 @@ function Nesterov83(f,∇f,x_ini,k)
     end
 
     return f_val
+end
+
+####
+function VBS19(f,oracle,x_0,L,μ,k,ρ)
+    n = length(x_0)
+    w = zeros(n);
+    v = zeros(n);
+
+    f_val = zeros(k);
+
+    for i=1:k
+        η = 1 / (ρ*L)
+        γ = 1 / (sqrt(μ*η*ρ));
+        β = 1 - sqrt((μ*η)/ρ);
+        b = sqrt(μ)/(β^((k+1)/2));
+        a = 1 / (β^((k+1)/2));
+        α = (γ*β*b^2*η)/(γ*β*b^2*η+a^2);
+
+        ζ = α*v +(1-α)*w;
+        ∇f = oracle(ζ)
+        w = ζ - η*∇f;
+        v = β*v +(1-β)*ζ - γ*η*∇f;
+        f_val[i] = f(w)
+    end
+
+    return f_val;
 end
