@@ -131,7 +131,7 @@ oracle_fun = natural_compression; # natural compression
 ```
 Call the first-order method in the example above with: 
 ```
-f_star = AGM(f,oracle_fun,∇ϕ_cjg,x_0,σ,L,μ,3*k);
+AGM(f,oracle_fun,∇ϕ_cjg,x_0,σ,L,μ,3*k);
 ```
 
 
