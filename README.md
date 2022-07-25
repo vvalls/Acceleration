@@ -129,8 +129,10 @@ oracle_fun = oracle; # exact gradients
 oracle_fun = dithering; # random dithering
 oracle_fun = natural_compression; # natural compression
 ```
-
-
+Call the first-order method in the example above with: 
+```
+f_star = AGM(f,oracle_fun,∇ϕ_cjg,x_0,σ,L,μ,3*k);
+```
 
 
 # Acknowledgements
