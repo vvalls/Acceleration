@@ -112,14 +112,25 @@ For L-smooth and μ-strongly convex function the algorithm is:
 AGM(f,oracle,∇ϕ_cjg,x_0,σ,L,μ,k)
 ```
 ## 3. Oracles
-We can load different oracles that use the ```oracle``` defined earlier. 
-```julia
-include "oracles.jl"
-```
+We can load different oracles:
 1.  Gaussian Noise
 2.  Random Sparsification
 3.  Random Dithering
 4.  Natural Compression
+
+Load the oracle with: 
+```julia
+include("../src/oracles.jl");
+```
+and set the oracles directly:   
+```
+oracle_fun = random_sparsification; # random_sparsification
+oracle_fun = oracle; # exact gradients
+oracle_fun = dithering; # random dithering
+oracle_fun = natural_compression; # natural compression
+```
+
+
 
 
 # Acknowledgements
